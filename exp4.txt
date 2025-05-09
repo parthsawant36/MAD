@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text("My College")),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(child: Text("Menu")),
+              ListTile(title: Text("About Us")),
+              ListTile(title: Text("Departments")),
+              ListTile(title: Text("Student Section")),
+              ListTile(title: Text("Contact Us")),
+            ],
+          ),
+        ),
+        body: Center(child: Text("Welcome to My College")),
+      ),
+    );
+  }
+}
