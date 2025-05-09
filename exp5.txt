@@ -1,124 +1,40 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
+
+class Contact {
+  final String name;
+  final String phone;
+
+  Contact(this.name, this.phone);
+}
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'College App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  // For tracking the selected menu
-  int _selectedIndex = 0;
-
-  // Method to update the selected menu
-  void _onMenuItemSelected(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    Navigator.of(context).pop(); // Close the drawer
-  }
-
-  // Pages corresponding to the menu items
-  final List<Widget> _pages = [
-    AboutUsPage(),
-    DepartmentsPage(),
-    StudentSectionPage(),
-    ContactUsPage(),
+  final List<Contact> contacts = [
+    Contact("Alice", "1234567890"),
+    Contact("Bob", "9876543210"),
+    Contact("Charlie", "5555555555"),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('College App'),
-      ),
-      // Drawer widget
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'College Name',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text('About Us'),
-              onTap: () => _onMenuItemSelected(0),
-            ),
-            ListTile(
-              title: Text('Departments'),
-              onTap: () => _onMenuItemSelected(1),
-            ),
-            ListTile(
-              title: Text('Student Section'),
-              onTap: () => _onMenuItemSelected(2),
-            ),
-            ListTile(
-              title: Text('Contact Us'),
-              onTap: () => _onMenuItemSelected(3),
-            ),
-          ],
+    return MaterialApp(
+      title: 'Contact List',
+      home: Scaffold(
+        appBar: AppBar(title: Text('Contact List')),
+        body: ListView.builder(
+          itemCount: contacts.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: CircleAvatar(child: Text(contacts[index].name[0])),
+              title: Text(contacts[index].name),
+              subtitle: Text(contacts[index].phone),
+            );
+          },
         ),
       ),
-      body: _pages[_selectedIndex], // Show the corresponding page
-    );
-  }
-}
-
-class AboutUsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('About Us', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
-class DepartmentsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Departments', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
-class StudentSectionPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Student Section', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
-class ContactUsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Contact Us', style: TextStyle(fontSize: 24)),
     );
   }
 }
