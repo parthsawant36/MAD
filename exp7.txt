@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:sensors_plus/sensors_plus.dart';
+
+void main() => runApp(MaterialApp(home: SensorPage()));
+
+class SensorPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Sensor Data')),
+      body: Column(
+        children: [
+          StreamBuilder(
+            stream: accelerometerEvents,
+            builder: (c, s) => Text('Accel: ${s.data ?? "Loading..."}'),
+          ),
+          StreamBuilder(
+            stream: gyroscopeEvents,
+            builder: (c, s) => Text('Gyro: ${s.data ?? "Loading..."}'),
+          ),
+          StreamBuilder(
+            stream: userAccelerometerEvents,
+            builder: (c, s) => Text('Orientation: ${s.data ?? "Loading..."}'),
+          ),
+        ],
+      ),
+    );
+  }
+}
