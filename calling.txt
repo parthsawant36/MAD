@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(home: CallApp()));
+class CallApp extends StatefulWidget {
+  @override
+  _CallAppState createState() => _CallAppState();
+}
+class _CallAppState extends State<CallApp> {
+  String number = '';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Dialer")),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(number, style: TextStyle(fontSize: 32)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(onPressed: () => setState(() => number += '9'), child: Text("9")),
+              SizedBox(width: 10),
+              ElevatedButton(onPressed: () => setState(() => number = ''), child: Text("Clear")),
+              SizedBox(width: 10),
+              ElevatedButton(onPressed: () {}, child: Text("Call")),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
